@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.1.6",
     "@eslint/config-array": "^0.16.0",
     "@eslint/object-schema": "^2.1.4",
     "convex": "^1.12.2",
