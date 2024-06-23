@@ -15,7 +15,11 @@ export default function Home() {
         <UserButton />
         <Button onClick={() => {
           createProject({
-            name: "New Project"
+            id: 1,
+            name: "Collaborate",
+            description: "New Ilionx project",
+            customerId: 1,
+            isCompleted: false,
           })
         }}>Create Project</Button>
       </Authenticated>
