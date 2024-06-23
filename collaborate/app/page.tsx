@@ -8,6 +8,7 @@ import CreateProjectButton from "@/components/ui/create-project-button";
 export default function Home() {
   const projects = useQuery(api.projects.getProject);
   const createProject = useMutation(api.projects.createProject);
+  
   return (
     <main className="p-24 space-y-8">
       <div className="flex justify-between items-center">
