@@ -1,32 +1,25 @@
 'use client'
 import { Button } from "@/components/ui/button";
 import { api } from "../convex/_generated/api"
-import { SignInButton, UserButton } from "@clerk/nextjs";
-import { Authenticated, Unauthenticated, useMutation, useQuery } from "convex/react";
-import { ModeToggle } from "@/components/ui/mode-toggle";
-import { getProject } from "@/convex/projects";
+import {  useMutation, useQuery } from "convex/react";
 import { ProjectCard } from "./project-card";
+import CreateProjectButton from "@/components/ui/create-project-button";
 
 export default function Home() {
   const projects = useQuery(api.projects.getProject);
   const createProject = useMutation(api.projects.createProject);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Button variant={"destructive"} onClick={() =>
-        {
-          createProject({
-            id: 2, 
-            name: "Project 1", 
-            description: "Description 1",
-            phases: [1, 2, 3],
-            customerId: 1,
-            isCompleted: false
-          })
-        }
-      }>Create project</Button>
-
-      {projects?.map((project) => <ProjectCard project={project} key={project._id}/>)}
-
+    <main className="p-24 space-y-8">
+      <div className="flex justify-between items-center">
+      <h1 className="text-4xl text-bold">My projects</h1>
+      <CreateProjectButton/>
+      
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        {projects?.map((project) => (
+          <ProjectCard project={project} key={project._id} />
+        ))}
+      </div>
     </main>
   );
 }

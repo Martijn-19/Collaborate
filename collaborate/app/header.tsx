@@ -10,7 +10,7 @@ export function Header() {
   return (
     <div className="bg-slate-900 py-4 ">
       <div className="container mx-auto flex justify-between items-center">
-        <div className='flex items-center gap-4 text-2xl'>
+        <div className='flex items-center gap-4 text-xl dark: text-white'>
             <Image src="/ilionx.png" width={50} height={50} alt="Ilionx Logo" className='rounded'/>
             Collaborate 🔐
         </div>

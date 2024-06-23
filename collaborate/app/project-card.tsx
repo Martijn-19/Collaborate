@@ -17,10 +17,10 @@ export function ProjectCard({ project }: {project: Doc<"projects">} ) {
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <p>phases: {project.phases.toString()}</p>
       </CardContent>
       <CardFooter>
-        <Button>View</Button>
+        <Button variant={"secondary"}>View</Button>
       </CardFooter>
     </Card>
   );
