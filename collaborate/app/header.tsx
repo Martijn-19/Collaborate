@@ -1,11 +1,10 @@
-'use client'
-
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import { createProject, getProject } from "@/convex/projects"
 import { SignInButton, UserButton } from "@clerk/nextjs"
 import { Authenticated, Unauthenticated } from "convex/react"
+import { HeaderActions } from './header-actions'
 
 export function Header() {
   return (
@@ -15,17 +14,9 @@ export function Header() {
             <Image src="/ilionx.png" width={50} height={50} alt="Ilionx Logo" className='rounded'/>
             Collaborate 🔐
         </div>
-        <div>
-          <Unauthenticated>
-            <SignInButton />
-          </Unauthenticated>
-          <Authenticated>
-            <div className="flex gap-8">
-            <ModeToggle />
-            <UserButton />
-            </div>
-          </Authenticated>
-          
+        <div className='flex items-center gap-6'>
+        <ModeToggle />
+        <HeaderActions />
         </div>
       </div>
     </div>
