@@ -1,9 +1,17 @@
 import { mutation, query } from "./_generated/server";
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 
 export const getProject = query({
   async handler(ctx) {
-    return await ctx.db.query("projects").collect();
+
+    const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+    console.log(userId);
+
+    if (!userId) {
+      return [];
+    }
+
+    return await ctx.db.query("projects").withIndex('by_tokenIdentifier', (q) => q.eq('tokenIdentifier', userId)).collect();
   },
 });
 
@@ -17,6 +25,13 @@ export const createProject = mutation({
     isCompleted: v.boolean(),
   },
   async handler(ctx, args) {
+    const userId = (await ctx.auth.getUserIdentity())?.tokenIdentifier;
+    console.log(userId);
+
+    if (!userId) {
+      throw new ConvexError("Not authenticated");
+    }
+
     await ctx.db.insert("projects", {
       name: args.name,
       id: args.id,
@@ -24,6 +39,8 @@ export const createProject = mutation({
       phases: args.phases,
       customerId: args.customerId,
       isCompleted: args.isCompleted,
+      tokenIdentifier: userId,
+
     });
   },
 });

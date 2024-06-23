@@ -9,7 +9,9 @@ export default defineSchema({
     phases: v.array(v.number()),
     customerId: v.number(),
     isCompleted: v.boolean(),
-  }),
+    tokenIdentifier: v.string(),
+  }).index('by_tokenIdentifier', ['tokenIdentifier']),
+  
   customers: defineTable({
     id: v.number(),
     projectId: v.number(),
